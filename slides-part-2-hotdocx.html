@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>hotdocX & jsCoq Presentation</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/zenburn.css">
+    <style>
+        :root {
+            --r-main-font-size: 30px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+<!-- Title Slide -->
+<section>
+    <h2>Part 2</h2>
+    <h1>hotdocX & jsCoq</h1>
+    <h3>An Interactive, AI-Augmented, and Monetizable Platform for Coq</h3>
+</section>
+
+<!-- The Problem -->
+<section>
+    <section>
+        <h2>The Challenge: Sharing Coq Developments</h2>
+        <p>Coq is a cornerstone of formal methods, but sharing its rich, interactive proofs is hard.</p>
+        <div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+            <div style="width: 45%;">
+                <h3>Current State</h3>
+                <ul>
+                    <li>Static PDFs (Flattened)</li>
+                    <li>Code Repositories</li>
+                    <li class="fragment">High barrier to entry for non-experts</li>
+                </ul>
+            </div>
+            <div style="font-size: 4em; opacity: 0.5;">
+                &#10132;
+            </div>
+            <div style="width: 45%;">
+                <h3>The Community's Desire</h3>
+                <ul>
+                    <li>Dynamic & Accessible Platforms</li>
+                    <li class="fragment">Initiatives like "Coq Exchange" & "Coq Platform Docs" showed the need.</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <h3 class="fragment">The core problem: A missing platform that is both interactive and sustainable.</h3>
+        <aside class="notes">
+        Start by framing the problem that everyone in the room understands. Acknowledge past efforts respectfully to show we've done our homework. The key is to identify the sustainability gap.
+        </aside>
+    </section>
+</section>
+
+<!-- The Solution: hotdocX -->
+<section>
+    <section>
+        <h2>Our Solution: The hotdocX Platform</h2>
+        <p>An AI-powered social marketplace that transforms documents into live, interactive web applications.</p>
+        <img src="./hotdocx_Capture.PNG" style="height: 400px; border-radius: 8px;">
+        <p class="fragment">We're moving from "papers-with-code" to <strong>"papers-as-apps"</strong>.</p>
+        <aside class="notes">
+        Introduce hotdocX as the solution. The visual helps ground the abstract concept. The "papers-as-apps" tagline is a powerful summary.
+        </aside>
+    </section>
+    <section>
+        <h2>Core Concept: AI Templates</h2>
+        <p>A user provides a document (PDF, LaTeX, etc.) and a prompt. Our AI pipeline uses a template to generate a runnable application.</p>
+        <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="width: 48%;">
+                <p><strong>Arrowgram Template</strong></p>
+                <img src="./arrowgram_Capture.PNG" style="height: 250px; border-radius: 8px;">
+                <small>Renders commutative diagrams from natural language.</small>
+            </div>
+            <div style="width: 48%;">
+                <p><strong>Emdash Template</strong></p>
+                <img src="./emdash_code_Capture.PNG" style="height: 250px; border-radius: 8px;">
+                <small>Provides a live environment for our logical framework.</small>
+            </div>
+        </div>
+        <p class="fragment">The platform is flexible and context-aware. Now, let's add Coq to the mix.</p>
+        <aside class="notes">
+        Explain the core mechanism. Showing other templates demonstrates the platform's power and flexibility beyond just Coq.
+        </aside>
+    </section>
+</section>
+
+<!-- jsCoq Integration -->
+<section>
+    <section>
+        <h2>Making Coq a First-Class Citizen</h2>
+        <p>We created a <strong>`jsCoq` template</strong> for the hotdocX ecosystem.</p>
+        <p>Any Coq script can become a first-class, interactive, and shareable hotdocX event.</p>
+        <br>
+        <h3 class="fragment" style="color: #42affa;">Live Demo 1: Interactive Coq Session</h3>
+        <aside class="notes">
+        This is the bridge to the main topic. Set up the demo.
+        </aside>
+    </section>
+    <section>
+        <img src="./jsCoq-Capture2.PNG" style="max-height: 600px; border-radius: 8px;">
+        <p><small>An interactive jsCoq session embedded within a hotdocX event.</small></p>
+        <aside class="notes">
+        This slide serves as the placeholder for the live demo. I'll show how a user can take a Coq file, upload it, and instantly get an interactive session that they can share via a URL. I will also briefly mention the technical challenge with jsCoq versions > 0.15.1, as it's a relevant detail for this audience.
+        </aside>
+    </section>
+    <section>
+        <h2>Unlocking Powerful New Workflows</h2>
+        <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="width: 48%;">
+                <h4>Education</h4>
+                <ul>
+                    <li>Create tutorials from lectures + Coq files.</li>
+                    <li>Students solve exercises in-browser.</li>
+                    <li class="fragment"><strong>Monetize solutions</strong> behind a pay-to-view wall.</li>
+                </ul>
+            </div>
+            <div style="width: 48%;">
+                <h4>Research</h4>
+                <ul>
+                    <li>Publish an arXiv paper and a companion hotdocX event.</li>
+                    <li>Readers can experiment with lemmas directly.</li>
+                    <li class="fragment">Bridge the gap between paper and formalization.</li>
+                </ul>
+            </div>
+        </div>
+        <aside class="notes">
+        Focus on the "why". What tangible value does this provide to the audience? Connect the features directly to their work as educators and researchers. Crucially, I'm re-introducing the monetization aspect here.
+        </aside>
+    </section>
+</section>
+
+
+<!-- The Business Model -->
+<section>
+    <section>
+        <h2>Why is This Different? <strong>A Sustainable Business Model</strong></h2>
+        <p>Previous platforms were often excellent academic projects but lacked a model for long-term sustainability.</p>
+        <p class="fragment">hotdocX is built from the ground up on a <strong>creator economy</strong>.</p>
+        <br>
+        <ul class="fragment">
+            <li><strong>Monetize Your Content:</strong> Creators define a "Purchase Menu" for events (e.g., view source, remix rights, access solutions).</li>
+            <li><strong>Virtual Currency:</strong> Users purchase "Coins" via Stripe to access premium content.</li>
+            <li><strong>Subscription Tiers:</strong> Free, Premium, and VIP tiers unlock platform features like content mirroring and advanced API access.</li>
+        </ul>
+        <h4 class="fragment">This isn't just a tool; it's a self-sustaining ecosystem.</h4>
+        <aside class="notes">
+        This is the most important part of the pitch. Directly address the "failure" of past projects by highlighting the missing piece: a business model. Explain the key components of the creator economy.
+        </aside>
+    </section>
+    <section>
+        <h2>The Grand Vision: A Browser-Native Coq Kernel</h2>
+        <p>The co-location of `jsCoq` and our native framework, `Emdash`, opens a unique research opportunity.</p>
+        <h3 style="color: #42affa;">A Hybrid Emdash/Coq-light Kernel</h3>
+        <p>We can systematically augment the Emdash (λΠ-calculus) kernel with the features of CIC, all within a native TypeScript environment.</p>
+        <div class="fragment" style="display: flex; justify-content: space-around; align-items: center; font-size: 0.8em;">
+            <div style="width: 30%;">
+                <h4>Education</h4>
+                <p>A "hackable" kernel for teaching CIC without a complex build setup.</p>
+            </div>
+            <div style="width: 30%;">
+                <h4>Research</h4>
+                <p>Rapidly prototype new tactics and language features in TypeScript.</p>
+            </div>
+            <div style="width: 30%;">
+                <h4>AI Integration</h4>
+                <p>A native JS kernel is easier for AI agents to interact with than a compiled binary.</p>
+            </div>
+        </div>
+        <aside class="notes">
+        Appeal to the academics and core developers. Show that we have a long-term, ambitious technical vision that aligns with their interests. This adds significant credibility.
+        </aside>
+    </section>
+</section>
+
+
+<!-- Call to Action -->
+<section>
+    <section>
+        <h2>Join Us in Building the Future of Coq</h2>
+        <p>We have a working platform, a clear vision, and a sustainable model.</p>
+        <p class="fragment">To move from a developer preview to a robust product for the community, we need your support.</p>
+        <br>
+        <h3 class="fragment">Become a Sponsor</h3>
+        <div class="fragment">
+            <p>Your contribution, whether individual or institutional, directly funds development, infrastructure, and community growth.</p>
+            <a href="https://github.com/sponsors/hotdocx" target="_blank">
+                <h2 style="color: #42affa; border: 2px solid #42affa; padding: 10px 20px; display: inline-block; border-radius: 8px;">
+                    github.com/sponsors/hotdocx
+                </h2>
+            </a>
+             <p><small>Sponsoring provides premium and VIP tiers on the hotdocX platform.</small></p>
+        </div>
+        <aside class="notes">
+        The final "ask". Be direct, clear, and professional. Explain what the money is for and provide a single, clear call to action. Linking sponsorship to platform perks provides a direct incentive.
+        </aside>
+    </section>
+    <section>
+        <h2>Thank You</h2>
+        <br>
+        <h4>Questions & Discussion</h4>
+        <br>
+        <p><small>Platform: <a href="https://hotdocx.github.io">hotdocx.github.io</a></small></p>
+        <p><small>Sponsor: <a href="https://github.com/sponsors/hotdocx">github.com/sponsors/hotdocx</a></small></p>
+    </section>
+</section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            progress: true,
+            center: true
+        });
+    </script>
+</body>
+</html>

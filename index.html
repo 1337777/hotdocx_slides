@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Gemini Presentation</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/zenburn.css">
+    <style>
+        :root {
+            --r-main-font-size: 30px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+<!-- Title Slide -->
+<section>
+  <h1>Emdash</h1>
+  <h3>A Dependently Typed Logical Framework for Computational Synthetic Category Theory</h3>
+  <p><small>Based on the paper by Author</small></p>
+</section>
+
+
+
+<!-- The Problem -->
+<section>
+    <section>
+        <h2>The Problem: A Chasm</h2>
+        <br>
+        <div style="display: flex; justify-content: space-around; align-items: center; text-align: center;">
+            <div style="width: 45%;">
+                <h3>Informal Mathematics</h3>
+                <ul>
+                    <li>Fluid & Intuitive</li>
+                    <li>Structural Reasoning</li>
+                    <li class="fragment">Thrives on Abstraction</li>
+                </ul>
+            </div>
+            <div style="font-size: 4em; opacity: 0.5;">
+                &#8644;
+            </div>
+            <div style="width: 45%;">
+                <h3>Formal Systems</h3>
+                <ul>
+                    <li>Rigid & Explicit</li>
+                    <li>Foundational Encoding</li>
+                    <li class="fragment">Structure is a *proven property*, not an *intrinsic quality*</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <h3 class="fragment">Can we bridge this gap?</h3>
+        <aside class="notes">
+        The core motivation is the gap between how mathematicians think (structurally) and how most proof assistants work (encoding structures on top of a foundational theory). In Coq or Lean, a category is a record plus proofs; the laws feel tacked on.
+        </aside>
+    </section>
+    <section>
+        <h2>A Different Vision: Functorial Programming</h2>
+        <blockquote>
+        "The core entities of a mathematical domain—such as categories and functors—are not merely encoded but are themselves the primitive building blocks of the formal language."
+        </blockquote>
+        <p><small>Inspired by Kosta Dosen [1, 2]</small></p>
+        <br>
+        <p class="fragment">Proofs of structural integrity should be <strong>computations</strong>, not separate objects.</p>
+        <aside class="notes">
+        Introduce the philosophical underpinning: the Dosen school of thought. The key idea is to make structural laws computational. This sets the stage for Emdash's core features.
+        </aside>
+    </section>
+</section>
+
+
+
+<!-- Introducing Emdash -->
+<section>
+    <section>
+        <h2>Introducing: Emdash</h2>
+        <p>A novel dependently typed logical framework that implements these functorial principles.</p>
+        <br>
+        <ul>
+            <li class="fragment"><strong>Synthetic:</strong> Categorical notions (`Cat`, `Obj`, `Functor`) are primitives.</li>
+            <li class="fragment"><strong>Computational:</strong> Coherence laws are checked via definitional equality (βδι-reduction).</li>
+            <li class="fragment"><strong>Specification-Driven:</strong> Implemented in TypeScript, formally specified in Lambdapi.</li>
+            <li class="fragment"><strong>Practical:</strong> The formal engine for <strong>hotdocX</strong>, an AI-assisted formalization platform.</li>
+        </ul>
+        <aside class="notes">
+        This is the "elevator pitch" for Emdash. Cover the main keywords and the project's unique selling points. Emphasize the connection to the hotdocX project.
+        </aside>
+    </section>
+    <section>
+        <h2>Core Architecture</h2>
+        <div style="display: flex; justify-content: space-around;">
+            <div style="width: 48%;">
+                <h4>Type Theory Core</h4>
+                <ul>
+                    <li>λΠ-Calculus Modulo Theory</li>
+                    <li>HOAS for binders</li>
+                    <li>Bidirectional Type Checker</li>
+                    <li>Unification & Hole Solving</li>
+                </ul>
+            </div>
+            <div style="width: 48%;">
+                <h4>Synthetic Primitives</h4>
+                <ul>
+                    <li>`Cat`, `Obj`, `Hom`</li>
+                    <li>`Functor`, `Transf`</li>
+                    <li>Yoneda (`hom_cov`)</li>
+                    <li>User-defined rewrite rules</li>
+                </ul>
+            </div>
+        </div>
+        <p class="fragment">The system is designed to be extensible, allowing users to add their own definitions, rewrite rules, and unification hints.</p>
+        <aside class="notes">
+        A quick overview of the technical foundation. This shows it's built on established principles (lambda calculus) but with a unique synthetic flavor.
+        </aside>
+    </section>
+</section>
+
+
+
+<!-- Functorial Elaboration -->
+<section>
+    <section data-transition="slide-in fade-out">
+        <h2>The Killer Feature: Functorial Elaboration</h2>
+        <hr>
+        <h4>The Traditional Way: Data + Proof</h4>
+        <p>In Coq/Agda/Lean, you define a functor by providing:</p>
+        <ol>
+            <li><strong>Data:</strong> An object map `F₀` and a morphism map `F₁`.</li>
+            <li><strong>Proof:</strong> A separate proof term `F_preserves_comp` demonstrating that `F₁(g ∘ f) = F₁(g) ∘ F₁(f)`.</li>
+        </ol>
+        <p class="fragment">The structure and its laws are separate entities.</p>
+        <aside class="notes">
+        Set up the problem that Functorial Elaboration solves. Contrast with the status quo in mainstream provers.
+        </aside>
+    </section>
+    <section data-transition="fade-in slide-out">
+        <h2>The Emdash Way: Definitional Check</h2>
+        <p>In Emdash, defining a functor uses a single primitive:</p>
+        <pre><code class="typescript" data-line-numbers>MkFunctorTerm(C, D, fmap0, fmap1)</code></pre>
+        <p>The elaboration engine itself <strong>definitionally verifies</strong> the coherence laws during type checking.</p>
+        <p class="fragment" style="color: #42affa;"><strong>Coherence is a check, not a proof.</strong></p>
+        <aside class="notes">
+        Present the Emdash solution. The key takeaway is moving the coherence requirement from a user-provided proof to a system-internal computation.
+        </aside>
+    </section>
+    <section>
+        <h2>How It Works: The `MkFunctorTerm` Primitive</h2>
+        <ol>
+            <li><strong>Check Components:</strong> Verify types of `C`, `D`, `fmap0`, `fmap1`.</li>
+            <li class="fragment"><strong>Stage the Law:</strong> Create a hypothetical context with generic morphisms `f` and `g`.</li>
+            <li class="fragment"><strong>Construct Terms:</strong>
+                <ul>
+                    <li>`LHS := fmap1 (g ∘ f)`</li>
+                    <li>`RHS := (fmap1 g) ∘ (fmap1 f)`</li>
+                </ul>
+            </li>
+            <li class="fragment"><strong>Compute & Compare:</strong>
+                <ul>
+                    <li>Normalize `LHS` and `RHS`.</li>
+                    <li>Check if `normalize(LHS) ≡ normalize(RHS)`.</li>
+                </ul>
+            </li>
+            <li class="fragment"><strong>The Verdict:</strong>
+                <ul>
+                    <li>✅ **Success:** Elaboration succeeds. The term is accepted.</li>
+                    <li>❌ **Failure:** Throw a `CoherenceError` with the non-equal normal forms.</li>
+                </ul>
+            </li>
+        </ol>
+        <aside class="notes">
+        Walk through the algorithm. This is the technical heart of the presentation. Explain how computation (normalization) replaces proof construction.
+        </aside>
+    </section>
+</section>
+
+
+
+<!-- Specification -->
+<section>
+    <h2>Blueprint for Synthesis: The Lambdapi Specification</h2>
+    <p>The implementation is not ad-hoc; it's guided by a formal, executable specification.</p>
+    <pre><code class="lambdapi" data-line-numbers="3,11,14">
+constant symbol Cat : TYPE;
+injective symbol Obj : Cat → TYPE;
+injective symbol Hom : Π [A : Cat] (X: Obj A) (Y: Obj A), TYPE;
+
+// ...
+
+constant symbol Functor_cat : Π(A : Cat), Π(B : Cat), Cat;
+
+// Morphisms in the functor category ARE natural transformations
+rule @Hom (Functor_cat _ _) $F $G ↪ Transf $F $G;
+
+// Functoriality is a computational rule
+rule compose_morph (@fapp1 _ _ $F _ _ $a) (@fapp1 _ _ $F _ _ $a')
+  ↪ fapp1 $F (compose_morph $a $a');
+    </code></pre>
+    <p class="fragment">This declarative style makes coherence laws part of the system's core computational behavior.</p>
+    <aside class="notes">
+    Highlight the methodological rigor. The Lambdapi spec is a unique strength, showing that the TypeScript implementation is a faithful realization of a well-defined formal system. Point out the functoriality rule as a key example.
+    </aside>
+</section>
+
+
+
+<!-- Interactive Proving -->
+<section>
+    <section>
+        <h2>Interactive Theorem Proving</h2>
+        <p>Emdash isn't just for defining; it's for proving.</p>
+        <p>A proof-in-progress is a term with unsolved goals, called <strong>Holes</strong> (`?h0`).</p>
+        <pre><code class="typescript">
+Goal ?g0: ⊢ Π (n : Nat). Nat
+        </code></pre>
+        <p>Users construct proofs by refining these holes using tactics.</p>
+        <aside class="notes">
+        Shift from defining structures to proving properties about them. Introduce the concept of interactive proving via holes/goals.
+        </aside>
+    </section>
+    <section>
+        <h2>Example Proof Session</h2>
+        <p><strong>Goal:</strong> Prove `id : Nat -> Nat`</p>
+        <pre><code class="nohighlight" style="font-size: 0.8em;">
+// 1. State Goal
+defineGlobal("id_nat_proof", Pi("n", Expl, Nat, _ => Nat), Hole("?g0"))
+// > Goal ?g0: ⊢ Π (n : Nat). Nat
+
+// 2. Introduce hypothesis
+intro(Var("id_nat_proof"), "?g0", "n")
+// > Hole ?g0 solved with `λ n. ?g1`
+// > New Goal ?g1: n : Nat ⊢ Nat
+
+// 3. Solve goal with exact term
+exact(Var("id_nat_proof"), "?g1", Var("n"))
+// > Hole ?g1 solved with `n`
+
+// 4. Proof Complete!
+// Final term: λ (n : Nat). n
+        </code></pre>
+        <aside class="notes">
+        A concrete example makes the abstract concept of tactics much clearer. Walk through the steps to show how a proof is built incrementally.
+        </aside>
+    </section>
+</section>
+
+
+
+<!-- Validation and Vision -->
+<section>
+    <section>
+        <h2>Validation & Testing</h2>
+        <p>Emdash is a working TypeScript implementation, verified by a comprehensive test suite.</p>
+        <ul>
+            <li>✅ Inductive types (Nat, List, Vec) & dependent functions.</li>
+            <li>✅ Higher-order unification & pattern matching.</li>
+            <li>✅ **Crucially:** Tests confirm that `MkFunctorTerm` accepts valid functors and throws `CoherenceError` for invalid ones.</li>
+            <li>✅ Full interactive proof sessions are tested from start to finish.</li>
+        </ul>
+        <p class="fragment">The system behaves as specified.</p>
+        <aside class="notes">
+        Add credibility. This isn't just a design; it's an implemented and tested system. Highlighting the functorial elaboration test is key, as it validates the central claim.
+        </aside>
+    </section>
+    <section>
+        <h2>The Grand Vision: hotdocX</h2>
+        <p>Emdash is the formal engine for <strong>hotdocX</strong>, a web platform for AI-assisted formalization.</p>
+        <img src="./emdash_doc_Capture.PNG" style="height: 350px; border: none; background: none; box-shadow: none;">
+        <p><strong>Goal:</strong> Transform mathematical documents into executable, verifiable, and interactive formal content.</p>
+        <p class="fragment">Emdash's interactive proof mode and clear error reporting are designed for human-AI collaboration.</p>
+        <aside class="notes">
+        Connect Emdash back to its primary application. This shows the "so what?"—why this theoretical work matters in a practical sense.
+        </aside>
+    </section>
+</section>
+
+
+
+<!-- Conclusion -->
+<section>
+    <section>
+        <h2>Conclusion</h2>
+        <p>Emdash demonstrates a practical pathway for "functorial programming":</p>
+        <ul>
+            <li>A <strong>synthetic</strong> approach to category theory in a dependently typed framework.</li>
+            <li>A novel <strong>functorial elaboration</strong> mechanism that makes coherence a definitional check.</li>
+            <li>A robust implementation guided by a <strong>formal specification</strong>.</li>
+            <li>A practical tool with interactive proving, serving as the kernel for the <strong>hotdocX</strong> platform.</li>
+        </ul>
+        <aside class="notes">
+        Summarize the key achievements and contributions of the project.
+        </aside>
+    </section>
+    <section>
+        <h2>Future Work</h2>
+        <div style="display: flex; justify-content: space-around;">
+            <div>
+                <h4>Deepen the Synthesis</h4>
+                <ul>
+                    <li>ω-Categories via `Total_cat`</li>
+                    <li>Limits, Adjunctions</li>
+                    <li>Univalence</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Enhance the Framework</h4>
+                <ul>
+                    <li>Universe Hierarchy</li>
+                    <li>Performance Tuning</li>
+                    <li>Richer Tactic Language</li>
+                </ul>
+            </div>
+            <div>
+                <h4>hotdocX & AI</h4>
+                <ul>
+                    <li>AI-driven proof suggestions</li>
+                    <li>Document parsing (LaTeX)</li>
+                    <li>Visualization tools</li>
+                </ul>
+            </div>
+        </div>
+        <aside class="notes">
+        Outline the roadmap. This shows the project has a clear direction and invites discussion and collaboration.
+        </aside>
+    </section>
+    <section>
+        <h2>Thank You</h2>
+        <br>
+        <h4>Questions?</h4>
+        <br>
+        <p><small>Project Repository: <a href="https://github.com/hotdocx/emdash">github.com/hotdocx/emdash</a></small></p>
+        <p><small>hotdocX Platform: <a href="https://hotdocx.github.io">hotdocx.github.io</a></small></p>
+        <p><small>Continue: <a href="./slides-part-2-hotdocx.html">./slides-part-2-hotdocx.html</a></small></p>
+    </section>
+</section>
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            // Set up separators to correctly parse your mixed format
+            separator: '^\\s*\\s*$',
+            verticalSeparator: '^\\s*\\s*$', // Keep both as `` for simplicity
+
+            // Enable plugins
+            plugins: [],
+            // You can add more configuration options here
+            history: true,
+            progress: true,
+            center: true
+        });
+    </script>
+</body>
+</html>
